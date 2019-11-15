@@ -547,11 +547,12 @@
 
         <xsl:if test="marc:datafield[@tag=256]/marc:subfield[@code='a']">
           <span class="results_summary isbn"><span class="label">Copyright information: </span>
-            <a><xsl:attribute name="href"><xsl:select="marc:datafield[@tag=256]/marc:subfield[@code='a']"></xsl:attribute><a>
+             <xsl:for-each select="marc:datafield[@tag=256]">
+            <a><xsl:attribute name="href"><xsl:value-of select="str:encode-uri(marc:subfield[@code='a'], true())"/></xsl:attribute>
               <span property="copyright">
-                <xsl:value-of select="."/>
                 <xsl:choose><xsl:when test="position()=last()"><xsl:text></xsl:text></xsl:when><xsl:otherwise><xsl:text>; </xsl:text></xsl:otherwise></xsl:choose>
               </span>
+             </xsl:for-each>
           </span>
         </xsl:if>
 
