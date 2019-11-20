@@ -545,17 +545,6 @@
                 </span>
             </xsl:if>
 
-        <xsl:if test="marc:datafield[@tag=256]/marc:subfield[@code='a']">
-          <span class="results_summary isbn"><span class="label">Copyright information: </span>
-             <xsl:for-each select="marc:datafield[@tag=256]">
-             <xsl:attribute name="href"><xsl:value-of select="str:encode-uri(marc:subfield[@code='a'], true())"/></xsl:attribute>
-              <span property="copyright">
-                <xsl:choose><xsl:when test="position()=last()"><xsl:text></xsl:text></xsl:when><xsl:otherwise><xsl:text>; </xsl:text></xsl:otherwise></xsl:choose>
-              </span>
-             </xsl:for-each>
-          </span>
-        </xsl:if>
-
         <xsl:if test="marc:datafield[@tag=020]/marc:subfield[@code='a']">
           <span class="results_summary isbn"><span class="label">ISBN: </span>
             <xsl:for-each select="marc:datafield[@tag=020]/marc:subfield[@code='a']">
@@ -1048,6 +1037,25 @@
                 <xsl:with-param name="codes">abcd</xsl:with-param>
             </xsl:call-template>
             <xsl:for-each select="marc:subfield[@code='u']">
+                <a><xsl:attribute name="href"><xsl:value-of select="text()"/></xsl:attribute>
+                <xsl:if test="$OPACURLOpenInNewWindow='1'">
+                    <xsl:attribute name="target">_blank</xsl:attribute>
+                </xsl:if>
+                <xsl:value-of select="text()"/>
+                </a>
+            </xsl:for-each>
+        </span>
+        </xsl:for-each>
+        </xsl:if>
+        
+        <!-- 256 -->
+        <xsl:if test="marc:datafield[@tag=256]">
+        <xsl:for-each select="marc:datafield[@tag=256]">
+        <span class="results_summary additionalforms">
+            <xsl:call-template name="subfieldSelect">
+                <xsl:with-param name="codes">abcd</xsl:with-param>
+            </xsl:call-template>
+            <xsl:for-each select="marc:subfield[@code='a']">
                 <a><xsl:attribute name="href"><xsl:value-of select="text()"/></xsl:attribute>
                 <xsl:if test="$OPACURLOpenInNewWindow='1'">
                     <xsl:attribute name="target">_blank</xsl:attribute>
