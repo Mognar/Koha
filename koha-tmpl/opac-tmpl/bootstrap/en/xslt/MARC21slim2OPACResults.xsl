@@ -450,6 +450,24 @@
     <xsl:variable name="OpenURLImageLocation" select="marc:sysprefs/marc:syspref[@name='OpenURLImageLocation']" />
     <xsl:variable name="OpenURLText" select="marc:sysprefs/marc:syspref[@name='OpenURLText']" />
     <xsl:variable name="OpenURLResolverURL" select="marc:variables/marc:variable[@name='OpenURLResolverURL']" />
+        
+    <!-- L2C2 - 2017-11-28 adding accn no to results page 952$p -->
+<xsl:if test="marc:datafield[@tag=952]/marc:subfield[@code='p']">
+<span class="results_summary accn_no">
+<span class="label">Accession number(s): </span>
+    <xsl:for-each select="marc:datafield[@tag=952]">
+        <xsl:value-of select="marc:subfield[@code='p']"/>
+        <xsl:choose>
+            <xsl:when test="position()=last()">
+                <xsl:text>.</xsl:text>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:text>, </xsl:text>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:for-each>
+</span>
+</xsl:if>
 
     <xsl:if test="$OPACShowOpenURL = 1 and $OpenURLResolverURL != ''">
       <xsl:variable name="openurltext">
