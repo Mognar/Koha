@@ -8,7 +8,7 @@
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
   xmlns:str="http://exslt.org/strings"
   exclude-result-prefixes="marc items str">
-    <xsl:import href="https://github.com/Mognar/Koha/blob/master/koha-tmpl/opac-tmpl/bootstrap/en/xslt/MARC21slimUtils.xsl"/>
+    <xsl:import href="https://raw.githubusercontent.com/Mognar/Koha/master/koha-tmpl/opac-tmpl/bootstrap/en/xslt/MARC21slimUtils.xsl"/>
     <xsl:output method = "html" indent="yes" omit-xml-declaration = "yes" encoding="UTF-8"/>
 
     <xsl:template match="/">
